@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "postcss-color-mix": "^1.1.0",
+    "postcss-each": "^1.1.0",
+    "postcss-each-variables": "^0.3.0",
+    "postcss-for": "^2.1.1",
+    "postcss-nested": "^7.0.2",
+    "vue-macros": "^3.0.0-beta.8"
+  }
+}

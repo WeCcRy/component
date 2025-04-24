@@ -7,6 +7,10 @@
 
     "paths": {
       "@/*": ["./src/*"]
-    }
-  }
+    },
+    "types": ["vue-macros/macros-global" /* ... */],
+  },
+  "vueCompilerOptions": {
+    "plugins": ["vue-macros/volar"],
+  },
 }

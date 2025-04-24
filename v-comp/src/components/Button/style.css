@@ -1,0 +1,125 @@
+.wy-button {
+  --wy-button-font-weight: var(--wy-font-weight-primary);
+  --wy-button-border-color: var(--wy-border-color);
+  --wy-button-bg-color: var(--wy-fill-color-blank);
+  --wy-button-text-color: var(--wy-text-color-regular);
+  --wy-button-disabled-text-color: var(--wy-disabled-text-color);
+  --wy-button-disabled-bg-color: var(--wy-fill-color-blank);
+  --wy-button-disabled-border-color: var(--wy-border-color-light);
+  --wy-button-hover-text-color: var(--wy-color-primary);
+  --wy-button-hover-bg-color: var(--wy-color-primary-light-9);
+  --wy-button-hover-border-color: var(--wy-color-primary-light-7);
+  --wy-button-active-text-color: var(--wy-button-hover-text-color);
+  --wy-button-active-border-color: var(--wy-color-primary);
+  --wy-button-active-bg-color: var(--wy-button-hover-bg-color);
+  --wy-button-outline-color: var(--wy-color-primary-light-5);
+  --wy-button-active-color: var(--wy-text-color-primary);
+}
+.wy-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--wy-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: .1s;
+  font-weight: var(--wy-button-font-weight);
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--wy-button-bg-color);
+  border: var(--wy-border);
+  border-color: var(--wy-button-border-color);
+  padding: 8px 15px;
+  font-size: var(--wy-font-size-base);
+  border-radius: var(--wy-border-radius-base);
+  & + & {
+    margin-left: 12px;
+  }
+  &:hover,
+  &:focus {
+    color: var(--wy-button-hover-text-color);
+    border-color: var(--wy-button-hover-border-color);
+    background-color: var(--wy-button-hover-bg-color);
+    outline: none;    
+  }
+  &:active {
+    color: var(--wy-button-active-text-color);
+    border-color: var(--wy-button-active-border-color);
+    background-color: var(--wy-button-active-bg-color);
+    outline: none;
+  }
+  &.is-plain {
+    --wy-button-hover-text-color: var(--wy-color-primary);
+    --wy-button-hover-bg-color: var(--wy-fill-color-blank);
+    --wy-button-hover-border-color: var(--wy-color-primary);    
+  }
+  /*round*/
+  &.is-round {
+    border-radius: var(--wy-border-radius-round);
+  }
+  /*circle*/
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+  }
+  /*disabled*/
+  &.is-disabled, &.is-disabled:hover, &.is-disabled:focus, 
+  &[disabled], &[disabled]:hover, &[disabled]:focus 
+  {
+    color: var(--wy-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--wy-button-disabled-bg-color);
+    border-color: var(--wy-button-disabled-border-color);
+  }
+  [class*=wy-icon] + span {
+    margin-left: 6px;
+  }
+}
+@each $val in primary,success,warning,info,danger {
+  .wy-button--$(val) {
+    --wy-button-text-color: var(--wy-color-white);
+    --wy-button-bg-color: var(--wy-color-$(val));
+    --wy-button-border-color: var(--wy-color-$(val));
+    --wy-button-outline-color: var(--wy-color-$(val)-light-5);
+    --wy-button-active-color: var(--wy-color-$(val)-dark-2);
+    --wy-button-hover-text-color: var(--wy-color-white);
+    --wy-button-hover-bg-color: var(--wy-color-$(val)-light-3);
+    --wy-button-hover-border-color: var(--wy-color-$(val)-light-3);
+    --wy-button-active-bg-color: var(--wy-color-$(val)-dark-2);
+    --wy-button-active-border-color: var(--wy-color-$(val)-dark-2);
+    --wy-button-disabled-text-color: var(--wy-color-white);
+    --wy-button-disabled-bg-color: var(--wy-color-$(val)-light-5);
+    --wy-button-disabled-border-color: var(--wy-color-$(val)-light-5);
+  }
+  .wy-button--$(val).is-plain {
+    --wy-button-text-color: var(--wy-color-$(val));
+    --wy-button-bg-color: var(--wy-color-$(val)-light-9);
+    --wy-button-border-color: var(--wy-color-$(val)-light-5);
+    --wy-button-hover-text-color: var(--wy-color-white);
+    --wy-button-hover-bg-color: var(--wy-color-$(val));
+    --wy-button-hover-border-color: var(--wy-color-$(val));
+    --wy-button-active-text-color: var(--wy-color-white);
+  }
+}
+.wy-button--large {
+  --wy-button-size: 40px;
+  height: var(--wy-button-size);
+  padding: 12px 19px;
+  font-size: var(--wy-font-size-base);
+  border-radius: var(--wy-border-radius-base);
+}
+.wy-button--small {
+  --wy-button-size: 24px;
+  height: var(--wy-button-size);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: calc(var(--wy-border-radius-base) - 1px);
+}
+
