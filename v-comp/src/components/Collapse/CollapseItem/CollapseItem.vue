@@ -37,6 +37,7 @@ const handleClick = (name: string) => {
     CollapseContext?.handleClick(name); // 调用父组件的点击事件处理函数
 };
 
+// 定义v-on的参数对象，通过js来实现过渡动画
 const transitionEvents: Record<string, (el: HTMLElement) => void> = {
     beforeEnter(el) {
         el.style.height = '0px';
