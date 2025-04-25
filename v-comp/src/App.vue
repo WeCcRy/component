@@ -36,20 +36,15 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
   <Button size="large">Large</Button>
   <Button size="small">Small</Button><br /><br />
 
-  <Collapse v-model=openedVal accordion>
-    <Item title="Item 1" name="item1">
+  <Collapse v-model=openedVal>
+    <Item title="Item1" name="item1">
       <!-- 具名插槽-item -->
-      <template #title>
-        <div>Custom Title for Item 1</div>
-        <div>subTitle</div>
-      </template>
-      <h1>Content Header</h1>
-      <div>Content for Item 1</div>
+      <div>  {{openedVal}}</div>
     </Item>
     <br />
 
-    <Item title="Item 2" name="item2">
-      <div>Content for Item 2</div>
+    <Item title="Item2" name="item2">
+      <div>  {{openedVal}}</div>
     </Item>
     <br />
 
@@ -57,8 +52,6 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
       <div>Content for Item 3</div>
     </Item>
   </Collapse>
-
-  {{openedVal}}
 </template>
 
 <style scoped></style>

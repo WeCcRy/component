@@ -1,0 +1,56 @@
+.wy-collapse {
+  --wy-collapse-border-color: var(--wy-border-color-light);
+  --wy-collapse-header-height: 48px;
+  --wy-collapse-header-bg-color: var(--wy-fill-color-blank);
+  --wy-collapse-header-text-color: var(--wy-text-color-primary);
+  --wy-collapse-header-font-size: 13px;
+  --wy-collapse-content-bg-color: var(--wy-fill-color-blank);
+  --wy-collapse-content-font-size: 13px;
+  --wy-collapse-content-text-color: var(--wy-text-color-primary);
+  --wy-collapse-disabled-text-color: var(--wy-disabled-text-color);
+  --wy-collapse-disabled-border-color: var(--wy-border-color-lighter);
+  border-top: 1px solid var(--wy-collapse-border-color);
+  /* border-bottom: 1px solid var(--wy-collapse-border-color); */
+}
+.wy-collapse-item__header{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  height: var(--wy-collapse-header-height);
+  line-height: var(--wy-collapse-header-height);
+  background-color: var(--wy-collapse-header-bg-color);
+  color: var(--wy-collapse-header-text-color);
+  cursor: pointer;
+  font-size: var(--wy-collapse-header-font-size);
+  font-weight: bolder;
+  transition: border-bottom-color var(--wy-transition-duration);
+  outline: none;
+  border-bottom: 1px solid var(--wy-collapse-border-color);
+  &.is-disabled {
+    color: var(--wy-collapse-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+  }
+  &.is-active {
+    border-bottom-color: transparent;
+    .header-angle {
+      transform: rotate(90deg);
+    }
+  }
+  .header-angle {
+    transition: transform var(--wy-transition-duration);
+  }
+}
+.wy-collapse-item__content {
+  will-change: height;
+  background-color: var(--wy-collapse-content-bg-color);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: var(--wy-collapse-content-font-size);
+  color: var(--wy-collapse-content-text-color);
+  border-bottom: 1px solid var(--wy-collapse-border-color);
+  padding-bottom: 10px;
+}
+.slide-enter-active, .slide-leave-active {
+  transition: height var(--wy-transition-duration);
+}
