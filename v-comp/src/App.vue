@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem/CollapseItem.vue'
+import type { NameType } from './components/Collapse/types'
 
 const buttonRef = ref<ButtonInstance | null>(null)
 onMounted(() => {
@@ -12,6 +13,8 @@ onMounted(() => {
     console.log(buttonRef.value.ref) // 这里可以访问到 Button 组件内部的 button 元素
   }
 })
+
+const openedVal = ref<NameType[]>(['item1', 'item2'])
 </script>
 
 <template>
@@ -33,7 +36,7 @@ onMounted(() => {
   <Button size="large">Large</Button>
   <Button size="small">Small</Button><br /><br />
 
-  <Collapse>
+  <Collapse v-model=openedVal accordion>
     <Item title="Item 1" name="item1">
       <!-- 具名插槽-item -->
       <template #title>
@@ -54,6 +57,8 @@ onMounted(() => {
       <div>Content for Item 3</div>
     </Item>
   </Collapse>
+
+  {{openedVal}}
 </template>
 
 <style scoped></style>
