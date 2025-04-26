@@ -1,5 +1,6 @@
 <template>
-    <div class = 'wy-icon' :class="{[`wy-icon--${type}`]:type}" :style="CustomStyle">
+    <!-- $attrs用于获取props外的属性 -->
+    <div class = 'wy-icon' :class="{[`wy-icon--${type}`]:type}" :style="CustomStyle" v-bind="$attrs">
         <FontAwesomeIcon v-bind="filteredProps" />
     </div>
 </template>

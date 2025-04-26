@@ -1,10 +1,12 @@
 <template>
     <div class='wy-collapse-item'>
         <div class=wy-collapse-item__header :id="`item_header-${name}`" @click=handleClick(String(name)) :class="{
-        'is-disabled': disabled,
-        'is-active': isActive,
-    }">
+            'is-disabled': disabled,
+            'is-active': isActive,
+        }">
             <slot name='title'>{{ title }}</slot>
+            <Icon icon="arrow-right" class="header-angle"></Icon>
+
         </div>
         <Transition name="slide" v-on="transitionEvents">
             <div class="vk-collapse-item__wrapper" v-show="isActive">
@@ -20,6 +22,7 @@
 import type { CollapseItemProps, CollapseContext } from '../types';
 import { CollapseContextKey } from '../types';
 import { computed, inject } from 'vue';
+import Icon from '@/components/Icon/Icon.vue';
 defineOptions({
     name: 'WyCollapseItem',
     inheritAttrs: false,

@@ -15,7 +15,7 @@
 .wy-collapse-item__header{
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   height: var(--wy-collapse-header-height);
   line-height: var(--wy-collapse-header-height);
   background-color: var(--wy-collapse-header-bg-color);
@@ -33,10 +33,12 @@
   }
   &.is-active {
     border-bottom-color: transparent;
+    /* 展开标签后旋转Icon */
     .header-angle {
       transform: rotate(90deg);
     }
   }
+  /* Icon旋转动画 */
   .header-angle {
     transition: transform var(--wy-transition-duration);
   }
