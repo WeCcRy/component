@@ -27,7 +27,7 @@
   text-align: center;
   box-sizing: border-box;
   outline: none;
-  transition: .1s;
+  transition: 0.1s;
   font-weight: var(--wy-button-font-weight);
   user-select: none;
   vertical-align: middle;
@@ -46,7 +46,7 @@
     color: var(--wy-button-hover-text-color);
     border-color: var(--wy-button-hover-border-color);
     background-color: var(--wy-button-hover-bg-color);
-    outline: none;    
+    outline: none;
   }
   &:active {
     color: var(--wy-button-active-text-color);
@@ -57,7 +57,7 @@
   &.is-plain {
     --wy-button-hover-text-color: var(--wy-color-primary);
     --wy-button-hover-bg-color: var(--wy-fill-color-blank);
-    --wy-button-hover-border-color: var(--wy-color-primary);    
+    --wy-button-hover-border-color: var(--wy-color-primary);
   }
   /*round*/
   &.is-round {
@@ -69,20 +69,24 @@
     padding: 8px;
   }
   /*disabled*/
-  &.is-disabled, &.is-disabled:hover, &.is-disabled:focus, 
-  &[disabled], &[disabled]:hover, &[disabled]:focus 
-  {
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus {
     color: var(--wy-button-disabled-text-color);
     cursor: not-allowed;
     background-image: none;
     background-color: var(--wy-button-disabled-bg-color);
     border-color: var(--wy-button-disabled-border-color);
   }
-  [class*=wy-icon] + span {
+  /* wy-button中class中包含wy-icon的元素，其相邻的span元素添加一个margin-left */
+  [class*='wy-icon'] + span {
     margin-left: 6px;
   }
 }
-@each $val in primary,success,warning,info,danger {
+@each $val in primary, success, warning, info, danger {
   .wy-button--$(val) {
     --wy-button-text-color: var(--wy-color-white);
     --wy-button-bg-color: var(--wy-color-$(val));
@@ -122,4 +126,3 @@
   font-size: 12px;
   border-radius: calc(var(--wy-border-radius-base) - 1px);
 }
-

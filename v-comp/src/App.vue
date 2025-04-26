@@ -37,6 +37,8 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
   <Button type="danger" plain>Danger</Button><br /><br />
   <Button size="large">Large</Button>
   <Button size="small">Small</Button><br /><br />
+  <Button loading>Loading</Button>
+  <Button icon ="arrow-right">Icon</Button>
 
   <Collapse v-model=openedVal>
     <Item title="Item1" name="item1">

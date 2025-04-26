@@ -12,6 +12,8 @@ export interface ButtonProps {
   disabled?: boolean // 是否禁用按钮
   nativeType?: NativeType // 原生按钮类型
   autofocus?: boolean // 是否自动获取焦点
+  loading?: boolean // 是否加载中
+  icon?: string // 图标名称
 }
 
 
