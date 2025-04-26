@@ -1,0 +1,50 @@
+.wy-alert {
+  --wy-alert-font-weight: var(--wy-font-weight-primary);
+  --wy-alert-border-color: var(--wy-border-color);
+  --wy-alert-bg-color: var(--wy-fill-color-blank);
+  --wy-alert-text-color: var(--wy-text-color-regular);
+  --wy-alert-font-size: var(--wy-font-size-base);
+}
+
+.wy-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  margin: 10px 5px;
+  border-radius: 10px;
+  font-size: var(--wy-font-size-base);
+  font-weight: var(--wy-alert-font-weight);
+  color: var(--wy-alert-text-color);
+  background-color: var(--wy-alert-bg-color);
+  border: var(--wy-border);
+  border-color: var(--wy-alert-border-color);
+}
+
+@each $val in primary, success, warning, info, danger {
+  .wy-alert--$(val) {
+    --wy-alert-text-color: var(--wy-color-$(val));
+    --wy-alert-bg-color: var(--wy-color-$(val)-light-9);
+    --wy-alert-border-color: var(--wy-color-$(val)-light-9);
+    &.is-dark {
+      --wy-alert-text-color: var(--wy-color-white);
+      --wy-alert-bg-color: var(--wy-color-$(val));
+      --wy-alert-border-color: var(--wy-color-$(val));
+    }
+  }
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--wy-transition-duration);
+}
+
+.fade-enter-to,
+.fade-leave-from{
+    opacity: 1;
+}

@@ -4,8 +4,9 @@ import { ref, onMounted } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem/CollapseItem.vue'
-import type { NameType } from './components/Collapse/types'
 import Icon from './components/Icon/Icon.vue'
+import Alert from './components/Alert/Alert.vue'
+import type { NameType } from './components/Collapse/types'
 
 const buttonRef = ref<ButtonInstance | null>(null)
 onMounted(() => {
@@ -19,7 +20,7 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
 </script>
 
 <template>
-<Icon icon="arrow-up" size="2xl" type="success" spin color = 'black'/>
+  <Icon icon="arrow-up" size="2xl" type="success" spin color = 'black'/>
   <Button ref="buttonRef">Test Button</Button>
   <Button plain>Plain Button</Button>
   <Button round>Round Button</Button>
@@ -56,6 +57,17 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
       <div>Content for Item 3</div>
     </Item>
   </Collapse>
+
+  <div>
+    <Alert type="primary" content = "primary"></Alert>
+    <Alert type="success">success</Alert>
+    <Alert type="info" effect="dark">info-dark</Alert>
+    <Alert type="warning" effect="dark">warning-dark</Alert>
+    <Alert type="danger">
+      <div>danger</div>
+      <div>It is dangerous</div>
+    </Alert>
+  </div>
 </template>
 
 <style scoped></style>
