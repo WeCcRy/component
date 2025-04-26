@@ -5,6 +5,7 @@ import type { ButtonInstance } from './components/Button/types'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem/CollapseItem.vue'
 import type { NameType } from './components/Collapse/types'
+import Icon from './components/Icon/Icon.vue'
 
 const buttonRef = ref<ButtonInstance | null>(null)
 onMounted(() => {
@@ -18,6 +19,7 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
 </script>
 
 <template>
+<Icon icon="arrow-up" size="2xl" type="success" spin color = 'black'/>
   <Button ref="buttonRef">Test Button</Button>
   <Button plain>Plain Button</Button>
   <Button round>Round Button</Button>

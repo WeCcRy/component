@@ -1,0 +1,17 @@
+.wy-icon {
+    --wy-icon-color: inherit;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    fill: currentColor;
+    color: var(--wy-icon-color);
+    font-size: inherit;
+  }
+  
+  @each $val in primary,info,success,warning,danger {
+    .wy-icon--$(val) {
+      --wy-icon-color: var(--wy-color-$(val));
+    }
+  }
+  
