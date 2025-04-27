@@ -59,10 +59,10 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
   </Collapse>
 
   <div>
-    <Alert type="primary" content = "primary"></Alert>
-    <Alert type="success">success</Alert>
-    <Alert type="info" effect="dark">info-dark</Alert>
-    <Alert type="warning" effect="dark">warning-dark</Alert>
+    <Alert type="primary" content = "primary" closeable></Alert>
+    <Alert type="success" closeable>success</Alert>
+    <Alert type="info" effect="dark" closeable>info-dark</Alert>
+    <Alert type="warning" effect="dark" closeable>warning-dark</Alert>
     <Alert type="danger">
       <div>danger</div>
       <div>It is dangerous</div>

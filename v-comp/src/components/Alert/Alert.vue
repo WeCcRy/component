@@ -9,7 +9,7 @@
         <div>
             <slot></slot> <!-- 插槽，用于在组件中插入内容 -->
         </div>
-        <Icon icon="xmark" style="cursor: pointer;" @click="deleteAlert"></Icon>
+        <Icon icon="xmark" style="cursor: pointer;" @click="deleteAlert" v-show="closeable"></Icon>
     </div>
 </Transition>
 </template>
