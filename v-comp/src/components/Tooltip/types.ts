@@ -8,7 +8,7 @@ export interface TooltipProps {
   transition?: string
   openDelay?: number
   closeDelay?: number
-}
+} 
 
 export interface TooltipEmits {
     // 用于向父组件告知tooltip的可见性变化

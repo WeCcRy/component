@@ -2,7 +2,7 @@
     --wy-popover-bg-color: var(--wy-bg-color-overlay);
     --wy-popover-font-size: var(--wy-font-size-base);
     --wy-popover-border-color: var(--wy-border-color);
-    --wy-popover-padding: 12px;
+    --wy-popover-padding: 5px;
     --wy-popover-border-radius: 4px;
     display: inline-block;
   }
