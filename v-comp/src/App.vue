@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import Button from '@/components/Button/Button.vue'
 import { ref, onMounted } from 'vue'
-import type { ButtonInstance } from './components/Button/types'
+import Button from '@/components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem/CollapseItem.vue'
 import Icon from './components/Icon/Icon.vue'
 import Alert from './components/Alert/Alert.vue'
+import Tooltip from './components/Tooltip/Tooltip.vue'
 import type { NameType } from './components/Collapse/types'
+import type { ButtonInstance } from './components/Button/types'
+import type { TooltipInstance } from './components/Tooltip/types'
+
 
 const buttonRef = ref<ButtonInstance | null>(null)
+const tiggerType = ref<any>('hover') // hover click
+const tooltipRef = ref<TooltipInstance | null>(null)
+const tooltipVisible = ref(false)
+
 onMounted(() => {
   if (buttonRef.value) {
     console.log(buttonRef.value) // 这里可以访问到 Button 组件的Proxy实例
@@ -16,11 +23,37 @@ onMounted(() => {
   }
 })
 
+const visableChange = (visable:boolean)=>{
+  tooltipVisible.value = visable
+}
+
+const changeTrigger = (val:any) =>{
+  tiggerType.value = val
+  if(val === 'manaul'){
+    tooltipVisible.value = !tooltipVisible.value
+    tooltipVisible.value? tooltipRef.value?.open():tooltipRef.value?.close()
+  }
+}
+
 const openedVal = ref<NameType[]>(['item1', 'item2'])
 </script>
 
 <template>
-  <Icon icon="arrow-up" size="2xl" type="success" spin color = 'black'/>
+  <header style="display: flex;">
+    <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+      <Button size="small" @click = "changeTrigger('hover')">hover</Button>
+      <Button size="small" @click = "changeTrigger('click')">click</Button>
+      <Button size="small" @click = "changeTrigger('manaul')">manaul</Button>
+    </div>
+    <Tooltip placement="right" :trigger="tiggerType" ref="tooltipRef" @visable-change="visableChange" :open-delay="200" :close-delay="200" >
+      <img alt="vue logo" src="./assets/logo.svg " width="100px" height="100px" />
+      <template #content>
+          <h6>Tooltip Title</h6>
+          <span>Tooltip Content</span>
+      </template>
+    </Tooltip>
+  </header>
+  <Icon icon="arrow-up" size="2xl" type="success" spin color='black' />
   <Button ref="buttonRef">Test Button</Button>
   <Button plain>Plain Button</Button>
   <Button round>Round Button</Button>
@@ -39,17 +72,17 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
   <Button size="large">Large</Button>
   <Button size="small">Small</Button><br /><br />
   <Button loading>Loading</Button>
-  <Button icon ="arrow-right">Icon</Button>
+  <Button icon="arrow-right">Icon</Button>
 
   <Collapse v-model=openedVal>
     <Item title="Item1" name="item1">
       <!-- 具名插槽-item -->
-      <div>  {{openedVal}}</div>
+      <div> {{ openedVal }}</div>
     </Item>
     <br />
 
     <Item title="Item2" name="item2">
-      <div>  {{openedVal}}</div>
+      <div> {{ openedVal }}</div>
     </Item>
     <br />
 
@@ -59,13 +92,13 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
   </Collapse>
 
   <div>
-    <Alert type="primary" content = "primary" closeable></Alert>
+    <Alert type="primary" content="primary" closeable></Alert>
     <Alert type="success" closeable>success</Alert>
     <Alert type="info" effect="dark" closeable>info-dark</Alert>
     <Alert type="warning" effect="dark" closeable>warning-dark</Alert>
     <Alert type="danger">
       <div>danger</div>
-      <div>It is dangerous</div>
+      <div>It is not closeable</div>
     </Alert>
   </div>
 </template>

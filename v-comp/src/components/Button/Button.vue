@@ -24,7 +24,6 @@ import { ref } from 'vue'
 // 定义组件名称
 defineOptions({
     name: 'WyButton', // 组件名称
-    inheritAttrs: false, // 继承父组件的属性
 })
 // 定义该组件可以接收哪些 props 参数以及它们的类型。使用withDefaults函数来设置默认值
 withDefaults(defineProps<ButtonProps>(), {
