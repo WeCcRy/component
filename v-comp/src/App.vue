@@ -7,9 +7,12 @@ import Icon from './components/Icon/Icon.vue'
 import Alert from './components/Alert/Alert.vue'
 import Tooltip from './components/Tooltip/Tooltip.vue'
 import Dropdown from './components/Dropdown/Dropdown.vue'
+// import Message from './components/Message/Message.vue'
 import type { NameType } from './components/Collapse/types'
 import type { ButtonInstance } from './components/Button/types'
 import type { TooltipInstance } from './components/Tooltip/types'
+import { createMessage } from './components/Message/method.ts'
+import { set } from 'lodash-es'
 
 
 const buttonRef = ref<ButtonInstance | null>(null)
@@ -35,10 +38,12 @@ const options = [
 ]
 
 onMounted(() => {
-  if (buttonRef.value) {
-    console.log(buttonRef.value) // 这里可以访问到 Button 组件的Proxy实例
-    console.log(buttonRef.value.ref) // 这里可以访问到 Button 组件内部的 button 元素
-  }
+  const instance = createMessage({message:'两秒后调用手动删除',duration: 0,type:'success'})
+  createMessage({message:'常驻信息',duration: 0})
+  createMessage({message:'三秒后自动删除',type:'danger'})
+  setTimeout(() => {
+    instance.destroy()
+  }, 2000)
 })
 
 const visableChange = (visable: boolean) => {
@@ -56,7 +61,6 @@ const changeTrigger = (val: any) => {
 const dropdownSelect = (item: any) => {
   console.log('dropdownSelect', item)
 }
-
 const openedVal = ref<NameType[]>(['item1', 'item2'])
 </script>
 
@@ -71,6 +75,7 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
       :close-delay="200" :menu-options="options">
       <img alt="vue logo" src="./assets/logo.svg " width="100px" height="100px" />
     </Dropdown>
+    <!-- <Message></Message> -->
   </header>
   <Icon icon="arrow-up" size="2xl" type="success" spin color='black' />
   <Button ref="buttonRef">Test Button</Button>
