@@ -8,6 +8,7 @@ import Alert from './components/Alert/Alert.vue'
 import Tooltip from './components/Tooltip/Tooltip.vue'
 import Dropdown from './components/Dropdown/Dropdown.vue'
 import Input from './components/Input/Input.vue'
+import Switch from './components/Switch/Switch.vue'
 // import Message from './components/Message/Message.vue'
 import type { NameType } from './components/Collapse/types'
 import type { ButtonInstance } from './components/Button/types'
@@ -20,6 +21,7 @@ const tiggerType = ref<any>('hover') // hover click
 const tooltipRef = ref<TooltipInstance | null>(null)
 const tooltipVisible = ref(false)
 const inputVal = ref('')
+const switchVal = ref('correct')
 const options = [
   {
     label: h('b', 'item1'),
@@ -79,6 +81,7 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
       @select="dropdownSelect" :open-delay="200" :close-delay="200" :menu-options="options">
       <img alt="vue logo" src="./assets/logo.svg " width="100px" height="100px" />
     </Dropdown>
+    <Switch v-model="switchVal" active-value="correct" in-active-value="wrong" size="large" active-text="Correct" in-active-text="Wrong"></Switch>
     <!-- <Message></Message> -->
   </header>
   <Icon icon="arrow-up" size="2xl" type="success" spin color='black' />
