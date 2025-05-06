@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted,h } from 'vue'
+import { ref, onMounted, h } from 'vue'
 import Button from '@/components/Button/Button.vue'
 import Collapse from './components/Collapse/Collapse.vue'
 import Item from './components/Collapse/CollapseItem/CollapseItem.vue'
@@ -7,30 +7,34 @@ import Icon from './components/Icon/Icon.vue'
 import Alert from './components/Alert/Alert.vue'
 import Tooltip from './components/Tooltip/Tooltip.vue'
 import Dropdown from './components/Dropdown/Dropdown.vue'
+import Input from './components/Input/Input.vue'
 // import Message from './components/Message/Message.vue'
 import type { NameType } from './components/Collapse/types'
 import type { ButtonInstance } from './components/Button/types'
 import type { TooltipInstance } from './components/Tooltip/types'
 import { createMessage } from './components/Message/method.ts'
-import { set } from 'lodash-es'
 
 
 const buttonRef = ref<ButtonInstance | null>(null)
 const tiggerType = ref<any>('hover') // hover click
 const tooltipRef = ref<TooltipInstance | null>(null)
 const tooltipVisible = ref(false)
+const inputVal = ref('')
 const options = [
-  { label:h('b','item1'),
+  {
+    label: h('b', 'item1'),
     key: "1",
     disabled: false,
     divided: false,
   },
-  { label:"item2",
+  {
+    label: "item2",
     key: "item2",
     disabled: false,
     divided: true,
   },
-  { label:"item3",
+  {
+    label: "item3",
     key: "item3",
     disabled: true,
     divided: false,
@@ -38,9 +42,9 @@ const options = [
 ]
 
 onMounted(() => {
-  const instance = createMessage({message:'两秒后调用手动删除',duration: 0,type:'success'})
-  createMessage({message:'常驻信息',duration: 0})
-  createMessage({message:'三秒后自动删除',type:'danger'})
+  const instance = createMessage({ message: '两秒后调用手动删除', duration: 0, type: 'success' })
+  createMessage({ message: '常驻信息', duration: 0 })
+  createMessage({ message: '三秒后自动删除', type: 'danger' })
   setTimeout(() => {
     instance.destroy()
   }, 2000)
@@ -71,8 +75,8 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
       <Button size="small" @click="changeTrigger('click')">click</Button>
       <Button size="small" @click="changeTrigger('manaul')">manaul</Button>
     </div>
-    <Dropdown placement="right" :trigger="tiggerType" ref="tooltipRef" @visable-change="visableChange" @select="dropdownSelect" :open-delay="200"
-      :close-delay="200" :menu-options="options">
+    <Dropdown placement="right" :trigger="tiggerType" ref="tooltipRef" @visable-change="visableChange"
+      @select="dropdownSelect" :open-delay="200" :close-delay="200" :menu-options="options">
       <img alt="vue logo" src="./assets/logo.svg " width="100px" height="100px" />
     </Dropdown>
     <!-- <Message></Message> -->
@@ -124,6 +128,21 @@ const openedVal = ref<NameType[]>(['item1', 'item2'])
       <div>danger</div>
       <div>It is not closeable</div>
     </Alert>
+  </div>
+  <div>
+    <Input placeholder="请输入内容" v-model="inputVal" type="text" clearable show-password size="large">
+    <template #prepend>
+      <Icon icon="arrow-left" />
+      <span style="margin-left: 10px;">Prepend</span>
+      </template>
+      <template #prefix>
+      <div>Input</div>
+      </template>
+      <template #append>
+      <span style="margin-right: 10px;">Append</span>
+      <Icon icon="arrow-right" />
+      </template>
+    </Input>
   </div>
 </template>
 
