@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import type { TooltipEmits, TooltipProps, TooltipInstance } from './types';
-import { ref, watch, reactive, onUnmounted, Transition } from 'vue';
+import { ref, watch, reactive, onUnmounted, Transition,computed } from 'vue';
 import type { Instance } from '@popperjs/core';
 import { createPopper } from '@popperjs/core';
 import useClickOutside from '@/hooks/useClickOutside';
@@ -25,8 +25,8 @@ import { debounce } from 'lodash-es';
 const props = withDefaults(defineProps<TooltipProps>(), {
     placement: "right",
     transition: "fade",
-    openDelay: 0,
-    closeDelay: 0,
+    openDelay: 100,
+    closeDelay: 100,
 })
 const emits = defineEmits<TooltipEmits>()
 const isOpen = ref(false) // 控制popper是否显示
@@ -38,22 +38,39 @@ let popperInstance: Instance | null = null  // popper实例
 
 const event: Record<string, any> = reactive({}) // 事件对象
 const outerEvent: Record<string, any> = reactive({}) // 外部事件对象
+const popperOptions = computed(() => {
+    return {
+        placement: props.placement,
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: [0, 8],
+                },
+            }
+        ],
+        ...props.popperOptions
+    }
+})
 
 useClickOutside(popperElement, () => {
     if (props.trigger === 'click' && isOpen.value && !props.manaul) {
         isOpen.value = false // 点击外部区域时关闭popper
-        emits('visable-change', isOpen.value) // 触发 visable-change 事件
+        emits('visible-change', isOpen.value) // 触发 visible-change 事件
+    }
+    if(isOpen.value) {
+        emits('click-outside')
     }
 })
 
 const open = () => {
     isOpen.value = true // 显示popper
-    emits('visable-change', isOpen.value) // 触发 visable-change 事件
+    emits('visible-change', isOpen.value) // 触发 visible-change 事件
 }
 
 const close = () => {
     isOpen.value = false // 关闭popper
-    emits('visable-change', isOpen.value) // 触发 visable-change 事件
+    emits('visible-change', isOpen.value) // 触发 visible-change 事件
 }
 
 const openDebounce = debounce(open, props.openDelay)
@@ -127,10 +144,8 @@ watch(isOpen, (newVal) => {
     if (newVal) {
         if (triggerNode.value && popperNode.value) {
             // 如果 isOpen 为 true，则创建 Popper 实例
-            popperInstance = createPopper(triggerNode.value, popperNode.value, {
-                placement: props.placement,
-            })
-            // console.log(popperInstance)
+            popperInstance = createPopper(triggerNode.value, popperNode.value, popperOptions.value)
+            console.log(popperInstance)
         }
     }
 }, { flush: 'post' }) // 在DOM更新后执行watch函数
@@ -142,7 +157,9 @@ onUnmounted(() => {
 defineExpose<TooltipInstance>({
     name: "wy-tooltip",
     open: openFinal,
-    close: closeFinal
+    close: closeFinal,
+    isOpen
+
 })
 </script>
 

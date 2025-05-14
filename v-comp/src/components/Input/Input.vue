@@ -23,7 +23,7 @@
                 </span>
                 <!-- input -->
                 <input ref="inputRef" class='wy-input__inner' v-bind="attrs"
-                    :type="showPassword && !eyeIconVisable ? 'password' : type" :disabled="disabled" :value="innerVal"
+                    :type="showPassword && !eyeIconvisible ? 'password' : type" :disabled="disabled" :value="innerVal"
                     @input="handleInput" @change="handleChange" @focus="handleFocus" @blur="handleBlur"
                     :placeholder="placeholder" :readonly="readonly" :autocomplete="autocomplete" :autofocus="autofocus"
                     :form="form" />
@@ -53,8 +53,10 @@
 
 <script setup lang="ts">
 import type { InputProps, InputEmits } from './types'
-import { computed, ref, watch, type Ref, useAttrs,nextTick } from 'vue'
+import { computed, ref, watch, type Ref, useAttrs,nextTick,inject } from 'vue'
 import Icon from '../Icon/Icon.vue'
+import { formItemContextKey } from '../Form/types'
+import { debounce } from 'lodash-es'
 
 
 defineOptions({
@@ -94,14 +96,14 @@ const showPasswordArea = computed(() => {
 })
 
 // 切换密码框的显示和隐藏
-const eyeIconVisable = ref(false)
+const eyeIconvisible = ref(false)
 
 const passwordIcon = computed(() => {
-    return eyeIconVisable.value ? 'eye' : 'eye-slash'
+    return eyeIconvisible.value ? 'eye' : 'eye-slash'
 })
 
 const clickEyeIcon = () => {
-    eyeIconVisable.value = !eyeIconVisable.value
+    eyeIconvisible.value = !eyeIconvisible.value
 }
 
 const keepFocus = async() => {
@@ -109,15 +111,31 @@ const keepFocus = async() => {
     inputRef.value?.focus()
 }
 
+const formItemContext = inject(formItemContextKey)
+const formValidate = async (trigger?: string) => {
+formItemContext?.validate(trigger).then(() => {
+        console.log('validate success')
+    }).catch((error) => {
+        console.log('validate error', error)
+    })
+    // debouncedValidate(trigger)
+};
+
+// const debouncedValidate = debounce((trigger?: string) => {
+//     formValidate(trigger);
+// }, 300);
+
 const handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement
     innerVal.value = target.value
     emits('update:modelValue', innerVal.value)
     emits('input', innerVal.value)
+    formValidate('input')
 }
 
 const handleChange = (e: Event) => {
     emits('change', innerVal.value)
+    formValidate('change')
 }
 
 const handleFocus = (e: FocusEvent) => {
@@ -126,9 +144,10 @@ const handleFocus = (e: FocusEvent) => {
 }
 
 const handleBlur = (e: FocusEvent) => {
+    console.log('blur',formItemContext)
     isFocus.value = false
     emits('blur', e)
-
+    formValidate('blur')
 }
 
 const clearInput = () => {

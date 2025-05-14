@@ -1,0 +1,83 @@
+/* 定义颜色变量 */
+:root {
+  --color-primary: var(--wy-color-primary);
+  --color-error: var(--wy-color-danger);
+  --color-success: var(--wy-color-success);
+  --color-border: #dcdfe6;
+  --color-text: #606266;
+  --font-size-base: 14px;
+  --font-size-small: 12px;
+  --spacing-base: 16px;
+  --spacing-small: 8px;
+}
+
+/* 表单容器 */
+.wy-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base);
+}
+
+.wy-form-item {
+  display: flex;
+  align-items: flex-start; /* 标签和内容顶部对齐 */
+  margin-bottom: var(--spacing-base);
+
+  &__label {
+    flex: 0 0 120px; /* 固定宽度，可根据需求调整 */
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-right: var(--spacing-small); /* 标签与内容之间的间距 */
+    text-align: right; /* 标签右对齐 */
+
+    &::after {
+      content: '*';
+      color: var(--color-error);
+      margin-left: 4px;
+    }
+  }
+
+  &__content {
+    flex: 1; /* 内容区域占据剩余空间 */
+    position: relative;
+
+    input {
+      width: 100%;
+      padding: var(--spacing-small) 12px;
+      font-size: var(--font-size-base);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    &-error {
+      margin-top: 4px;
+      font-size: var(--font-size-small);
+      color: var(--color-error);
+    }
+  }
+
+  &.is-error &__content {
+    .wy-input__wrapper {
+      border: 1px solid var(--color-error) !important;
+    }
+  }
+
+  &.is-success &__content {
+    .wy-input__wrapper {
+      border: 1px solid var(--color-success) !important;
+    }
+  }
+  &.is-error &__label {
+    color: var(--color-error);
+  }
+
+  &.is-success &__label {
+    color: var(--color-success);
+  }
+}
+.wy-form-item__content .wy-input__wrapper:has(input:focus) {
+  border: 1px solid var(--color-primary) !important;
+}

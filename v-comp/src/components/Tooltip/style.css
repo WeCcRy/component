@@ -40,19 +40,23 @@
       }
       /* 选择有属性data-popper-placement的元素，且以top开头 */
       &[data-popper-placement^='top'] > #arrow {
+        left: calc(50% - 4px);
         bottom: -5px;
       }
       
       &[data-popper-placement^='bottom'] > #arrow {
+        left: calc(50% - 4px);
         top: -5px;
       }
       
       &[data-popper-placement^='left'] > #arrow {
+        bottom: calc(50% - 4px);
         right: -5px;
       }
       
       &[data-popper-placement^='right'] > #arrow {
         left: -5px;
+        bottom: calc(50% - 4px);
       }
       &[data-popper-placement^="top"] > #arrow::before {
         border-right: 1px solid var(--wy-popover-border-color);

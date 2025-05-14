@@ -1,6 +1,6 @@
 <template>
     <Tooltip class="wy-dropdown" :trigger="trigger" :placement="placement" :open-delay="openDelay" :close-delay="closeDelay"
-        @visbile-change="visableChange" ref="tooltipRef" >
+        @visbile-change="visibleChange" ref="tooltipRef" >
         <slot></slot>
         <template #content>
             <ul class="wy-dropdown__menu">
@@ -30,8 +30,8 @@ import type { TooltipInstance } from '../Tooltip/types';
 const props = withDefaults(defineProps<DropdownProps>(),{hideAfterSelect: true});
 const emits = defineEmits<DropdownEmits>();
 const tooltipRef = ref<TooltipInstance|null>(null); // Tooltip 组件的引用
-const visableChange = (visable: boolean) => {
-    emits('visible-change', visable);
+const visibleChange = (visible: boolean) => {
+    emits('visible-change', visible);
 };
 const handleClick = (item: MenuOptions) => {
     if (item.disabled) return;
