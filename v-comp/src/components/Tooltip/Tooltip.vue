@@ -21,7 +21,9 @@ import type { Instance } from '@popperjs/core';
 import { createPopper } from '@popperjs/core';
 import useClickOutside from '@/hooks/useClickOutside';
 import { debounce } from 'lodash-es';
-
+defineOptions({
+    name: 'WyTooltip',
+})
 const props = withDefaults(defineProps<TooltipProps>(), {
     placement: "right",
     transition: "fade",
@@ -159,7 +161,6 @@ defineExpose<TooltipInstance>({
     open: openFinal,
     close: closeFinal,
     isOpen
-
 })
 </script>
 

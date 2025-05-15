@@ -6,7 +6,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import VueMacros from 'vue-macros/vite'
 import { resolve } from 'node:path'
-import dts from 'vite-plugin-dts'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -19,11 +18,6 @@ export default defineConfig({
       },
     }),
     vueDevTools(),
-    dts(
-    {
-      tsconfigPath:'./tsconfig.build.json'
-    }
-    ),
   ],
   resolve: {
     alias: {
@@ -31,17 +25,19 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'dist/umd',
     lib: {
       entry:resolve(__dirname, 'src/index.ts'),
       name: 'wy-comp',
       fileName:'wy-components',
+      formats: ['umd'],
     },
     rollupOptions: {
       external: ['vue'],
       output: {
-        exports: 'named',
+        exports: 'named', // umd模式下独立命名导出
         globals: {
-          vue: 'Vue',
+          vue: 'Vue', // umd模式下的全局依赖，主要是为了适配umd的环境
         },
       },
     },

@@ -23,7 +23,9 @@ import {isNil} from 'lodash-es' // 引入lodash-es的isNil函数，用于判断�
 import { formContextKey,formItemContextKey } from '../types'
 import { computed, inject, reactive ,provide,onMounted,onUnmounted} from 'vue'
 import Schema from 'async-validator' // 引入async-validator的Schema类型
-
+defineOptions({
+    name: 'WyFormItem',
+})
 const props = defineProps<FormItemProps>()
 
 const formContext = inject<FormContext>(formContextKey) // 获取父组件的上下文

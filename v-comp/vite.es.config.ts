@@ -21,7 +21,8 @@ export default defineConfig({
     vueDevTools(),
     dts(
     {
-      tsconfigPath:'./tsconfig.build.json'
+      tsconfigPath:'./tsconfig.build.json',
+      outDir: 'dist/types',
     }
     ),
   ],
@@ -31,19 +32,15 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'dist/es',
     lib: {
       entry:resolve(__dirname, 'src/index.ts'),
       name: 'wy-comp',
       fileName:'wy-components',
+      formats: ['es'],
     },
     rollupOptions: {
-      external: ['vue'],
-      output: {
-        exports: 'named',
-        globals: {
-          vue: 'Vue',
-        },
-      },
+      external: ['vue','@fortawesome/fontawesome-svg-core','@fortawesome/free-solid-svg-icons','@fortawesome/vue-fontawesome','@fortawesome/free-brands-svg-icons','@fortawesome/free-regular-svg-icons','@popperjs/core','async-validator','axios'],
     },
   },
 })

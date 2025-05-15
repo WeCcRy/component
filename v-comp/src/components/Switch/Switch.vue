@@ -20,7 +20,7 @@ import { computed, ref, watch } from 'vue';
 import type { SwitchProps, SwitchEmits } from './types'
 
 defineOptions({
-    name: 'Wy-Switch',
+    name: 'WySwitch',
     // 阻止将非props属性传递到根元素上
     inheritAttrs: false,
 })

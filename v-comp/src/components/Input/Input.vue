@@ -60,7 +60,7 @@ import { debounce } from 'lodash-es'
 
 
 defineOptions({
-    name: 'Input',
+    name: 'WyInput',
     // 阻止将非props属性传递到根元素上
     inheritAttrs: false,
 })

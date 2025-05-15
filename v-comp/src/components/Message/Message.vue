@@ -1,5 +1,5 @@
 <template>
-    <Transition name="fade" @enter="setHeight" @after-leave="destroyComponent">
+    <Transition name="message-fade" @enter="setHeight" @after-leave="destroyComponent">
         <div class='wy-message' :class="{ [`wy-message--${type}`]: type, 'is-close': showClose }" role="alert"
             v-show="visible" ref="messageRef" :style="cssStyle" @mouseenter="clearTimer" @mouseleave="startTimer">
             <div class='wy-message__content'>
@@ -21,7 +21,9 @@ import RenderVNode from '../Common/RenderVNode.ts';
 import { getLastOffset } from './method.ts';
 import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import useEventListener from '@/hooks/useEventListener.ts';
-
+defineOptions({
+    name: 'WyMessage',
+})
 const props = withDefaults(defineProps<MessageProps>(), {
     type: 'info',
     message: '这是一条消息',

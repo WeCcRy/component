@@ -1,5 +1,5 @@
 import type { Placement } from '@popperjs/core'
-
+import type { Ref } from 'vue'
 export interface TooltipProps {
   content?: string
   placement?: Placement
@@ -22,5 +22,5 @@ export interface TooltipInstance{
   name:string
   open:() => void
   close:() => void
-  isOpen:boolean
+  isOpen:Ref<boolean>
 }

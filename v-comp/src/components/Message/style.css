@@ -51,8 +51,8 @@
     }
   }
 }
-.fade-enter-from,
-.fade-leave-to {
+.message-fade-enter-from,
+.fmessage-fade-leave-to {
   opacity: 0;
   transform: translate(-50%, -100%);
 }

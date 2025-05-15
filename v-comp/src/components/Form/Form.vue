@@ -8,6 +8,10 @@
 import { provide, reactive } from 'vue';
 import { formContextKey, type FormProps,type FormContext,type FormItemContext,type FormValidateError } from './types';
 import type { ValidateFieldsError } from "async-validator";
+
+defineOptions({
+    name: 'WyForm',
+})
 const props = defineProps<FormProps>()
 
 const fieldList:FormItemContext[] = []

@@ -24,7 +24,7 @@
                         'is-highlight': index === inputItem.hightLightIndex,
                     }" :id="`select-item-${item.value}`" v-for="(item, index) in filterOptions" :key="index"
                         @click.prevent.stop=selectItem(item)>
-                        <RenderVNode :vNode="props.renderCustom ? renderCustom(item) : item.label"></RenderVNode>
+                        <RenderVNode :vNode="props.renderCustom ? props.renderCustom(item) : item.label"></RenderVNode>
                     </li>
                 </ul>
             </template>
@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
     clearable: true,
     placeholder: "请选择",
     filterable: false,
-    options: [] as SelectOption[]
+    options: () => [] as SelectOption[]
 })
 const emits = defineEmits<SelectEmits>()
 
@@ -124,10 +124,10 @@ const popperOptions = {
         enabled: true,
         phase: "beforeWrite",
         requires: ["computeStyles"],
-        fn: ({ state }) => {
+        fn: ({ state }: { state: any }) => {
             state.styles.popper.width = `${state.rects.reference.width}px`;
         },
-        effect: ({ state }) => {
+        effect: ({ state }: { state: any }) => {
             state.elements.popper.style.width = `${state.elements.reference.offsetWidth
                 }px`;
         }
@@ -144,7 +144,7 @@ const popperOptions = {
 const NOOP = () => { } // 空函数    
 
 const showClear = computed(() => {
-    return props.clearable && inputItem.inputValue.trim() && inputItem.isHover && inputItem.selectedOption // 如果可清除且有值且鼠标悬停，则显示清除图标
+    return props.clearable && inputItem.inputValue && inputItem.isHover && inputItem.selectedOption // 如果可清除且有值且鼠标悬停，则显示清除图标
 })
 
 const controlTooltip = async (val: boolean) => {

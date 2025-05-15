@@ -26,7 +26,9 @@ import RenderVNode from '../Common/RenderVNode';
 import type { DropdownProps, DropdownEmits, DropdownInstance, MenuOptions } from './types';
 import { ref,withDefaults } from 'vue';
 import type { TooltipInstance } from '../Tooltip/types';
-
+defineOptions({
+    name: 'WyDropdown',
+})
 const props = withDefaults(defineProps<DropdownProps>(),{hideAfterSelect: true});
 const emits = defineEmits<DropdownEmits>();
 const tooltipRef = ref<TooltipInstance|null>(null); // Tooltip 组件的引用

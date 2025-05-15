@@ -1,16 +1,51 @@
 {
-  "name": "v-comp",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@wy_sh/wy-components",
+  "version": "1.0.0",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "description": "components library for vue3",
+  "keywords": [
+    "vue3",
+    "components",
+    "library"
+  ],
+  "author": "wangy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WeCcRy/wy-components"
+  },
+  "sideEffects": [
+    "dist/wy-components.css"
+  ],
+  "main": "./dist/umd/wy-components.umd.cjs",
+  "module": "./dist/es/wy-components.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/es/wy-components.js",
+      "require": "./dist/umd/wy-components.umd.cjs",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./dist/": {
+      "import": "./dist/",
+      "require": "./dist/"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "npm run build-only && npm run move-style",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build-only": "run-p build-es build-umd",
+    "build-es": "vite build --config vite.es.config.ts",
+    "build-umd": "vite build --config vite.umd.config.ts",
+    "move-style": "move-file   dist/es/wy-components.css dist/wy-components.css",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -23,7 +58,9 @@
     "async-validator": "^4.2.5",
     "axios": "^1.9.0",
     "lodash-es": "^4.17.21",
-    "postcss-nested": "^7.0.2",
+    "postcss-nested": "^7.0.2"
+  },
+  "peerDependencies": {
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -39,12 +76,15 @@
     "eslint-plugin-vue": "~10.0.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
+    "move-file-cli": "^3.0.0",
     "npm-run-all2": "^7.0.2",
     "prettier": "3.5.3",
     "typescript": "~5.8.0",
     "vite": "^6.2.4",
+    "vite-plugin-dts": "^4.5.3",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vitest": "^3.1.2",
+    "vue": "^3.5.13",
     "vue-tsc": "^2.2.8"
   }
 }

@@ -187,7 +187,7 @@ const resetField = () => {
       <FormItem label="邮箱" prop="email">
         <!-- 语法，获取子组件传出的值 -->
         <template #content>
-          <Input v-model="formModel.email" type="text"></Input>
+          <Input v-model="formModel.email" type="text" clearable></Input>
         </template>
       </FormItem>
       <!-- 使用prop传入校验规则，校验名称为password -->
@@ -207,6 +207,7 @@ const resetField = () => {
       </div>
     </Form>
   </div>
+  <div>
   <Icon icon="arrow-up" size="2xl" type="success" spin color='black' />
   <Button ref="buttonRef">Test Button</Button>
   <Button plain>Plain Button</Button>
@@ -227,7 +228,8 @@ const resetField = () => {
   <Button size="small">Small</Button><br /><br />
   <Button loading>Loading</Button>
   <Button icon="arrow-right">Icon</Button>
-
+  </div>
+  <div>
   <Collapse v-model=openedVal>
     <Item title="Item1" name="item1">
       <!-- 具名插槽-item -->
@@ -244,7 +246,7 @@ const resetField = () => {
       <div>Content for Item 3</div>
     </Item>
   </Collapse>
-
+</div>
   <div>
     <Alert type="primary" content="primary" closeable></Alert>
     <Alert type="success" closeable>success</Alert>

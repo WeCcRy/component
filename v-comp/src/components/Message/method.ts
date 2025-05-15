@@ -66,3 +66,9 @@ export const getLastOffset = (id:string) => {
     }
     return 0
 }
+
+export const destoryAllMessage = () => {
+  messageList.forEach(message => {
+    message.destroy()
+  })
+}
